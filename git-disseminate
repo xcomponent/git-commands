@@ -1,0 +1,5 @@
+#!/bin/sh -e
+commits=`git rev-list -F -n 1000 --left-only --cherry-pick --no-merges \
+    --reverse --grep='!disseminate!' "${1:-master...$(git rev-parse \
+    --abbrev-ref HEAD)}"`
+[ -n "$commits" ] && git cherry-pick $commits
